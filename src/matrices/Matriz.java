@@ -26,6 +26,21 @@ public class Matriz {
                     datos[i][j] = rnd.nextInt(100);
         }
     }
+    
+    // Constructor para inicializar matriz con valores específicos
+    public Matriz(int[][] valores){
+        this.datos = valores;
+    }
+    
+    // Método para establecer un valor en una posición específica
+    public void setValor(int fila, int columna, int valor){
+        datos[columna][fila] = valor;
+    }
+    
+    // Método para obtener un valor de una posición específica
+    public int getValor(int fila, int columna){
+        return datos[columna][fila];
+    }
     public Matriz(Dimension d, boolean inicializarAleatorio){
         this(d.height, d.width, inicializarAleatorio);
     }
@@ -96,5 +111,20 @@ public class Matriz {
         } 
         ret += "]\n";
         return ret;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Matriz otra = (Matriz) obj;
+        if (!getDimension().equals(otra.getDimension())) return false;
+        
+        for (int i = 0; i < getDimension().height; i++) {
+            for (int j = 0; j < getDimension().width; j++) {
+                if (getValor(i, j) != otra.getValor(i, j)) return false;
+            }
+        }
+        return true;
     }
 }
